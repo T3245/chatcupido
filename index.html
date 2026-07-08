@@ -9,8 +9,8 @@
         body { background-color: #791c3a; padding: 15px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
         
         .visichat-container {
-            width: 900px;
-            height: 580px;
+            width: 850px;
+            height: 550px;
             background-color: #f0f0f0;
             border: 4px solid #4a0e23;
             border-radius: 4px;
@@ -38,9 +38,9 @@
             gap: 6px;
         }
 
-        /* 💬 CHAT TESTUALE (Bella grande a sinistra) */
+        /* 💬 CHAT TESTUALE */
         .chat-panel {
-            flex: 3; 
+            flex: 2.5; 
             display: flex;
             flex-direction: column;
             height: 100%;
@@ -54,30 +54,40 @@
             font-size: 13px;
         }
 
-        /* 👥 PANNELLO DESTRA (Webcam Piccola + Lista Utenti) */
+        /* 👥 PANNELLO DESTRA: ICONA WEBCAM + LISTA UTENTI */
         .right-panel {
-            width: 220px; /* Larghezza fissa del pannello laterale */
+            width: 200px;
             display: flex;
             flex-direction: column;
             gap: 6px;
         }
 
-        /* 🎥 RIQUADRO WEBCAM PICCOLA */
-        .small-cam-box {
-            height: 140px; /* Altezza ridotta per farla piccola e carina */
-            background-color: #111;
+        /* 🎥 L'ICONA DELLA WEBCAM CLICCABILE (APERTURA DIRETTA SICURA) */
+        .webcam-button {
+            background: linear-gradient(to bottom, #ff4d88 0%, #cc0044 100%);
+            color: white;
             border: 2px solid #4a0e23;
             border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            transition: transform 0.1s;
         }
-        .small-cam-box iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+        .webcam-button:hover {
+            background: linear-gradient(to bottom, #ff6699 0%, #e6005c 100%);
+            transform: scale(1.02);
         }
 
-        /* LISTA UTENTI (Sotto la webcam) */
+        /* LISTA UTENTI */
         .users-panel {
             flex: 1;
             background-color: #fff;
@@ -88,11 +98,10 @@
         .users-header {
             background-color: #e6b3c4;
             padding: 5px;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: bold;
             text-align: center;
             border-bottom: 1px solid #bbb;
-            text-transform: uppercase;
         }
         .users-list { flex: 1; overflow-y: auto; padding: 6px; font-size: 12px; }
         .user-row { display: flex; align-items: center; gap: 6px; padding: 3px 0; }
@@ -114,7 +123,7 @@
 
 <div class="visichat-container">
     <div class="visichat-header">
-        <span>🌐 VisiChat Rubacuori v4.5 (Small Cam Layout)</span>
+        <span>🌐 VisiChat Rubacuori v5.0 (Direct Cam Link)</span>
         <span style="color: #ffb3cd;">💖 Benvenuta 💖</span>
     </div>
 
@@ -122,26 +131,25 @@
         <!-- CHAT TESTUALE -->
         <div class="chat-panel">
             <div class="chat-history" id="chatHistory">
-                <div style="color: green; font-weight: bold; font-size: 12px;">[SYSTEM] Interfaccia caricata! La webcam ora si trova a destra ed è piccola e compatta.</div>
-                <div style="color: #555; font-size: 12px; margin-top: 5px;">Scrivi pure qui i tuoi messaggi, mentre a destra puoi accendere il video.</div>
+                <div style="color: #888; font-size: 12px; font-style: italic;">[SYSTEM] Benvenuto nella chat Rubacuori!</div>
+                <div style="color: #c9184a; font-weight: bold; font-size: 13px; margin-top: 5px;">
+                    🚀 LA TUA SOLUZIONE: Clicca sul pulsante rosa a destra "ATTIVA WEBCAM". Ti aprirà la videochat ufficiale sbloccata dal browser. Consenti l'uso della cam nel fumetto che apparirà!
+                </div>
             </div>
         </div>
 
         <!-- PANNELLO DESTRA -->
         <div class="right-panel">
             
-            <!-- 🎥 IL RIQUADRO WEBCAM RIMPICCIOUTTO -->
-            <div class="small-cam-box">
-                <iframe 
-                    src="https://meet.jit.si/VisichatRubacuoriEsclusiva#config.prejoinPageEnabled=false&config.startWithAudioMuted=true&config.backgroundAlpha=0.5" 
-                    allow="camera *; microphone *; fullscreen *; display-capture *"
-                    media-playback-requires-user-action="false">
-                </iframe>
-            </div>
+            <!-- APERTURA IN SCHEDA PULITA: NESSUN BLOCCO POSSIBILE -->
+            <a href="https://meet.jit.si/VisichatRubacuoriEsclusiva#config.prejoinPageEnabled=false" target="_blank" class="webcam-button">
+                <span class="webcam-icon-large">🎥</span>
+                <span>ATTIVA WEBCAM</span>
+            </a>
 
             <!-- LISTA UTENTI -->
             <div class="users-panel">
-                <div class="users-header">Persone in chat</div>
+                <div class="users-header">Online</div>
                 <div class="users-list" id="usersList">
                     <div class="user-row"><span class="status-dot status-dj"></span><strong>DJ_Tigrotta</strong></div>
                     <div class="user-row" style="padding-top: 5px; font-style: italic; color:#666;"><span class="status-dot"></span>Tu</div>
