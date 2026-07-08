@@ -9,8 +9,8 @@
         body { background-color: #791c3a; padding: 15px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
         
         .visichat-container {
-            width: 850px;
-            height: 550px;
+            width: 1050px;
+            height: 600px;
             background-color: #f0f0f0;
             border: 4px solid #4a0e23;
             border-radius: 4px;
@@ -38,9 +38,41 @@
             gap: 6px;
         }
 
+        /* 🎥 RIQUADRO WEBCAM INTERNO E PICCOLO */
+        .video-side-panel {
+            width: 320px; /* Compatto e laterale */
+            background-color: #2b2b2b;
+            border: 2px inset #fff;
+            padding: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .grid-title {
+            color: #ffb3cd;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 1px solid #444;
+            padding-bottom: 4px;
+            text-align: center;
+        }
+        .video-iframe-box {
+            flex: 1;
+            background-color: #111;
+            border: 2px solid #555;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .video-iframe-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
         /* 💬 CHAT TESTUALE */
         .chat-panel {
-            flex: 2.5; 
+            flex: 2; 
             display: flex;
             flex-direction: column;
             height: 100%;
@@ -54,42 +86,9 @@
             font-size: 13px;
         }
 
-        /* 👥 PANNELLO DESTRA: ICONA WEBCAM + LISTA UTENTI */
-        .right-panel {
-            width: 200px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        /* 🎥 L'ICONA DELLA WEBCAM CLICCABILE (APERTURA DIRETTA SICURA) */
-        .webcam-button {
-            background: linear-gradient(to bottom, #ff4d88 0%, #cc0044 100%);
-            color: white;
-            border: 2px solid #4a0e23;
-            border-radius: 4px;
-            padding: 12px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 13px;
-            cursor: pointer;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-            transition: transform 0.1s;
-        }
-        .webcam-button:hover {
-            background: linear-gradient(to bottom, #ff6699 0%, #e6005c 100%);
-            transform: scale(1.02);
-        }
-
-        /* LISTA UTENTI */
+        /* 👥 LISTA UTENTI DESTRA */
         .users-panel {
-            flex: 1;
+            width: 150px;
             background-color: #fff;
             border: 2px inset #fff;
             display: flex;
@@ -123,37 +122,34 @@
 
 <div class="visichat-container">
     <div class="visichat-header">
-        <span>🌐 VisiChat Rubacuori v5.0 (Direct Cam Link)</span>
-        <span style="color: #ffb3cd;">💖 Benvenuta 💖</span>
+        <span>🌐 VisiChat Rubacuori v6.0 (Embedded Cam Edition)</span>
+        <span style="color: #ffb3cd;">Stanza Live 🎥</span>
     </div>
 
     <div class="visichat-main">
-        <!-- CHAT TESTUALE -->
-        <div class="chat-panel">
-            <div class="chat-history" id="chatHistory">
-                <div style="color: #888; font-size: 12px; font-style: italic;">[SYSTEM] Benvenuto nella chat Rubacuori!</div>
-                <div style="color: #c9184a; font-weight: bold; font-size: 13px; margin-top: 5px;">
-                    🚀 LA TUA SOLUZIONE: Clicca sul pulsante rosa a destra "ATTIVA WEBCAM". Ti aprirà la videochat ufficiale sbloccata dal browser. Consenti l'uso della cam nel fumetto che apparirà!
-                </div>
+        <div class="video-side-panel">
+            <div class="grid-title">🎥 Video Chat Box</div>
+            <div class="video-iframe-box">
+                <iframe 
+                    src="https://meet.jit.si/VisichatRubacuoriEsclusiva#config.prejoinPageEnabled=false&config.startWithAudioMuted=true&config.background=true&interfaceConfig.TOOLBAR_BUTTONS=[]" 
+                    allow="camera *; microphone *; fullscreen *; display-capture *"
+                    loading="lazy">
+                </iframe>
             </div>
         </div>
 
-        <!-- PANNELLO DESTRA -->
-        <div class="right-panel">
-            
-            <!-- APERTURA IN SCHEDA PULITA: NESSUN BLOCCO POSSIBILE -->
-            <a href="https://meet.jit.si/VisichatRubacuoriEsclusiva#config.prejoinPageEnabled=false" target="_blank" class="webcam-button">
-                <span class="webcam-icon-large">🎥</span>
-                <span>ATTIVA WEBCAM</span>
-            </a>
+        <div class="chat-panel">
+            <div class="chat-history" id="chatHistory">
+                <div style="color: green; font-weight: bold; font-size: 12px;">[SYSTEM] Interfaccia VisiChat attiva.</div>
+                <div style="color: #791c3a; font-size: 12px; margin-top: 4px;">Guarda il riquadro grigio a sinistra: quando il browser ti mostra la notifica in alto, clicca subito su <b>"Consenti"</b> per far apparire il tuo video direttamente lì dentro!</div>
+            </div>
+        </div>
 
-            <!-- LISTA UTENTI -->
-            <div class="users-panel">
-                <div class="users-header">Online</div>
-                <div class="users-list" id="usersList">
-                    <div class="user-row"><span class="status-dot status-dj"></span><strong>DJ_Tigrotta</strong></div>
-                    <div class="user-row" style="padding-top: 5px; font-style: italic; color:#666;"><span class="status-dot"></span>Tu</div>
-                </div>
+        <div class="users-panel">
+            <div class="users-header">Online</div>
+            <div class="users-list" id="usersList">
+                <div class="user-row"><span class="status-dot status-dj"></span><strong>DJ_Tigrotta</strong></div>
+                <div class="user-item" style="padding-top: 5px; font-style: italic; color:#666;">Tu (Online)</div>
             </div>
         </div>
     </div>
