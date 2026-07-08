@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rubacuori VisiChat Live ❤️</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+        body { background-color: #791c3a; padding: 15px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        
+        .visichat-container {
+            width: 1100px;
+            height: 680px;
+            background-color: #f0f0f0;
+            border: 4px solid #4a0e23;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0px 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .visichat-header {
+            background: linear-gradient(to bottom, #94254b 0%, #5c142e 100%);
+            color: white;
+            padding: 8px 12px;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid #4a0e23;
+        }
+
+        .visichat-main {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            padding: 6px;
+            gap: 6px;
+        }
+
+        /* GRIGLIA VIDEO VISICHAT SU GITHUB */
+        .video-grid-container {
+            flex: 2.5;
+            background-color: #2b2b2b;
+            border: 2px inset #fff;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .grid-title {
+            color: #ffb3cd;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 1px solid #444;
+            padding-bottom: 4px;
+        }
+        .video-iframe-box {
+            flex: 1;
+            background-color: #111;
+            border: 2px solid #555;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .video-iframe-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* CHAT TESTUALE */
+        .chat-panel {
+            flex: 1.5;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .chat-history {
+            flex: 1;
+            background-color: white;
+            border: 2px inset #fff;
+            padding: 10px;
+            overflow-y: auto;
+            font-size: 13px;
+        }
+
+        /* LISTA UTENTI */
+        .users-panel {
+            width: 150px;
+            background-color: #fff;
+            border: 2px inset #fff;
+            display: flex;
+            flex-direction: column;
+        }
+        .users-header {
+            background-color: #e6b3c4;
+            padding: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 1px solid #bbb;
+        }
+        .users-list { flex: 1; overflow-y: auto; padding: 6px; font-size: 12px; }
+        .user-row { display: flex; align-items: center; gap: 6px; padding: 3px 0; }
+        .status-dot { width: 10px; height: 10px; background-color: #00ff00; border-radius: 50%; }
+        .status-dj { background-color: #ff00ff; }
+
+        /* FOOTER INPUT */
+        .visichat-footer {
+            background-color: #e1dfd0;
+            padding: 8px;
+            border-top: 1px solid #b5b2a1;
+        }
+        .input-bar { display: flex; gap: 6px; }
+        .input-bar input { flex: 1; padding: 6px; border: 2px inset #fff; font-size: 13px; }
+        .btn-send { padding: 4px 18px; background-color: #94254b; color: white; border: 1px solid #4a0e23; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div class="visichat-container">
+    <div class="visichat-header">
+        <span>🌐 VisiChat Rubacuori v2.0 (GitHub SSL Verified)</span>
+        <span style="color: #ffb3cd;">Stanza Live Cam 🎥</span>
+    </div>
+
+    <div class="visichat-main">
+        <!-- GRIGLIA VIDEO SECURE BY GITHUB -->
+        <div class="video-grid-container">
+            <div class="grid-title">🎥 MULTI-WEBCAM ROOM</div>
+            <div class="video-iframe-box">
+                <!-- Su GitHub questa stanza Whereby si caricherà con permessi nativi al 100% -->
+                <iframe 
+                    src="https://whereby.com/rubacuori-room-777?chat=off&info=off&floatSelf=on" 
+                    allow="camera; microphone; fullscreen; display-capture">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- CHAT TESTUALE -->
+        <div class="chat-panel">
+            <div class="chat-history" id="chatHistory">
+                <div style="color: green; font-weight: bold; font-size: 12px;">[SYSTEM] Connessione sicura stabilita su GitHub Pages! Inserisci il tuo nome nel riquadro video a sinistra per accendere la tua cam.</div>
+            </div>
+        </div>
+
+        <!-- LISTA UTENTI -->
+        <div class="users-panel">
+            <div class="users-header">Online</div>
+            <div class="users-list" id="usersList">
+                <div class="user-row"><span class="status-dot status-dj"></span><strong>DJ_Tigrotta</strong></div>
+                <div class="user-item" style="padding-top: 5px; font-style: italic; color:#666;">Tu (Online)</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="visichat-footer">
+        <div class="input-bar">
+            <input type="text" id="chatInput" placeholder="Invia un messaggio scritto nella stanza...">
+            <button class="btn-send" id="btnSend">Invia</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const chatHistory = document.getElementById('chatHistory');
+    const chatInput = document.getElementById('chatInput');
+    const btnSend = document.getElementById('btnSend');
+
+    function doSendMessage() {
+        const text = chatInput.value.trim();
+        if(text === "") return;
+        const msg = document.createElement('div');
+        msg.style.marginBottom = "4px";
+        msg.innerHTML = `<strong>Utente:</strong> ${text}`;
+        chatHistory.appendChild(msg);
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+        chatInput.value = "";
+    }
+
+    btnSend.addEventListener('click', doSendMessage);
+    chatInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') doSendMessage(); });
+</script>
+
+</body>
+</html>
