@@ -9,8 +9,8 @@
         body { background-color: #791c3a; padding: 15px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
         
         .visichat-container {
-            width: 1050px;
-            height: 620px;
+            width: 850px;
+            height: 550px;
             background-color: #f0f0f0;
             border: 4px solid #4a0e23;
             border-radius: 4px;
@@ -38,41 +38,9 @@
             gap: 6px;
         }
 
-        /* 🎥 BOX VIDEO OTTIMIZZATO (Abbastanza grande per Jitsi, ma compatto rispetto alla chat) */
-        .video-grid-container {
-            width: 360px; /* Portato a 360px per dare stabilità alla cam */
-            background-color: #2b2b2b;
-            border: 2px inset #fff;
-            padding: 6px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        .grid-title {
-            color: #ffb3cd;
-            font-size: 11px;
-            font-weight: bold;
-            text-transform: uppercase;
-            border-bottom: 1px solid #444;
-            padding-bottom: 4px;
-            text-align: center;
-        }
-        .video-iframe-box {
-            flex: 1; /* Prende tutto lo spazio del box laterale */
-            background-color: #111;
-            border: 2px solid #555;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        .video-iframe-box iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* 💬 CHAT TESTUALE (Prende il massimo spazio centrale) */
+        /* 💬 CHAT TESTUALE (Ora bella grande e centrale) */
         .chat-panel {
-            flex: 2; 
+            flex: 2.5; 
             display: flex;
             flex-direction: column;
             height: 100%;
@@ -86,9 +54,48 @@
             font-size: 13px;
         }
 
-        /* 👥 LISTA UTENTI DESTRA */
+        /* 👥 PANNELLO DESTRA: ICONA WEBCAM + LISTA UTENTI */
+        .right-panel {
+            width: 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        /* 🎥 L'ICONA DELLA WEBCAM CLICCABILE */
+        .webcam-button {
+            background: linear-gradient(to bottom, #ff4d88 0%, #cc0044 100%);
+            color: white;
+            border: 2px solid #4a0e23;
+            border-radius: 4px;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            transition: transform 0.1s;
+        }
+        .webcam-button:hover {
+            background: linear-gradient(to bottom, #ff6699 0%, #e6005c 100%);
+            transform: scale(1.02);
+        }
+        .webcam-button:active {
+            transform: scale(0.98);
+        }
+        .webcam-icon-large {
+            font-size: 28px;
+        }
+
+        /* LISTA UTENTI */
         .users-panel {
-            width: 150px;
+            flex: 1;
             background-color: #fff;
             border: 2px inset #fff;
             display: flex;
@@ -122,37 +129,35 @@
 
 <div class="visichat-container">
     <div class="visichat-header">
-        <span>🌐 VisiChat Rubacuori v3.6 (GitHub Secure Stream)</span>
-        <span style="color: #ffb3cd;">Stanza: Live Cam 🎥</span>
+        <span>🌐 VisiChat Rubacuori v4.0 (Icon Click Edition)</span>
+        <span style="color: #ffb3cd;">💖 Benvenuta 💖</span>
     </div>
 
     <div class="visichat-main">
-        <!-- PANNELLO WEBCAM CON PERMESSI AGGIORNATI -->
-        <div class="video-grid-container">
-            <div class="grid-title">🎥 Mini Video Jitsi</div>
-            <div class="video-iframe-box">
-                <!-- Sbloccati i permessi totali con camera * e microphone * -->
-                <iframe 
-                    src="https://meet.jit.si/VisichatRubacuoriEsclusiva#config.prejoinPageEnabled=false&config.startWithAudioMuted=true&interfaceConfig.filmStripOnly=true" 
-                    allow="camera *; microphone *; fullscreen *; display-capture *"
-                    media-playback-requires-user-action="false">
-                </iframe>
-            </div>
-        </div>
-
         <!-- CHAT TESTUALE -->
         <div class="chat-panel">
             <div class="chat-history" id="chatHistory">
-                <div style="color: green; font-weight: bold; font-size: 12px;">[SYSTEM] Codice corretto. Se vedi lo schermo nero di Jitsi, ricordati di fare click sul simbolo della videocamera per accenderla!</div>
+                <div style="color: #888; font-size: 12px; font-style: italic;">[SYSTEM] Benvenuto nella chat Rubacuori!</div>
+                <div style="color: #94254b; font-weight: bold; font-size: 12px; margin-top: 5px;">👉 Clicca sul pulsante rosa a destra "ATTIVA WEBCAM" per entrare in videochat con gli altri!</div>
             </div>
         </div>
 
-        <!-- LISTA UTENTI -->
-        <div class="users-panel">
-            <div class="users-header">Online</div>
-            <div class="users-list" id="usersList">
-                <div class="user-row"><span class="status-dot status-dj"></span><strong>DJ_Tigrotta</strong></div>
-                <div class="user-item" style="padding-top: 5px; font-style: italic; color:#666;">Tu (Online)</div>
+        <!-- PANNELLO DESTRA CON ICONA WEBCAM -->
+        <div class="right-panel">
+            
+            <!-- L'ICONA CLICCABILE DELLA WEBCAM (Apre Jitsi Meet in una nuova scheda pulita) -->
+            <a href="https://meet.jit.si/VisichatRubacuoriEsclusiva#config.prejoinPageEnabled=false" target="_blank" class="webcam-button">
+                <span class="webcam-icon-large">🎥</span>
+                <span>ATTIVA WEBCAM</span>
+            </a>
+
+            <!-- LISTA UTENTI -->
+            <div class="users-panel">
+                <div class="users-header">Online</div>
+                <div class="users-list" id="usersList">
+                    <div class="user-row"><span class="status-dot status-dj"></span><strong>DJ_Tigrotta</strong></div>
+                    <div class="user-row" style="padding-top: 5px; font-style: italic; color:#666;"><span class="status-dot"></span>Tu</div>
+                </div>
             </div>
         </div>
     </div>
