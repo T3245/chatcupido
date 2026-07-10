@@ -3,178 +3,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rubacuori VisiChat & Radio DJ Tita 🎧❤️</title>
+    <title>Rubacuori Radio-Chat Exclusive 🎧❤️</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
-        body { background-color: #791c3a; padding: 15px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         
-        .visichat-container {
-            width: 1050px;
-            height: 600px;
-            background-color: #f0f0f0;
-            border: 4px solid #4a0e23;
-            border-radius: 4px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0px 10px 25px rgba(0,0,0,0.5);
+        /* Sfondo animato super elegante con sfumatura e cuori stilizzati di sfondo */
+        body { 
+            background: linear-gradient(135deg, #4a0e23 0%, #8c1c40 50%, #b82e58 100%);
+            background-size: 400% 400%;
+            animation: gradientBg 15s ease infinite;
+            padding: 20px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
         }
 
+        @keyframes gradientBg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Contenitore della chat stile "Vip Lounge" con bordi neon sfumati */
+        .visichat-container {
+            width: 1100px;
+            height: 650px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0px 15px 35px rgba(0,0,0,0.6), 0 0 15px rgba(255, 179, 205, 0.2);
+            overflow: hidden;
+        }
+
+        /* Intestazione scintillante */
         .visichat-header {
-            background: linear-gradient(to bottom, #94254b 0%, #5c142e 100%);
+            background: linear-gradient(90deg, #5c142e 0%, #94254b 50%, #5c142e 100%);
             color: white;
-            padding: 8px 12px;
+            padding: 14px 20px;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 16px;
+            letter-spacing: 1px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             border-bottom: 2px solid #4a0e23;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
 
         .visichat-main {
             display: flex;
             flex: 1;
             overflow: hidden;
-            padding: 6px;
-            gap: 6px;
+            padding: 12px;
+            gap: 12px;
+            background: #fdfafb;
         }
 
-        /* 📻 PANNELLO RADIO LATERALE (Hearthis.at) */
+        /* 📻 PANNELLO RADIO LATERALE LOOK NEON */
         .radio-side-panel {
             width: 340px; 
-            background-color: #2b2b2b;
-            border: 2px inset #fff;
-            padding: 10px;
+            background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+            border: 2px solid #ff4081;
+            border-radius: 12px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
         }
+        
         .grid-title {
-            color: #ffb3cd;
-            font-size: 11px;
-            font-weight: bold;
+            color: #ff85a7;
+            font-size: 13px;
+            font-weight: 800;
             text-transform: uppercase;
             border-bottom: 1px solid #444;
-            padding-bottom: 4px;
+            padding-bottom: 6px;
             text-align: center;
-            width: 100%;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 5px rgba(255, 133, 167, 0.5);
         }
+
         .player-box {
             width: 100%;
             height: 150px;
             background-color: #111;
-            border: 2px solid #555;
-            border-radius: 4px;
+            border: 1px solid #333;
+            border-radius: 8px;
             overflow: hidden;
         }
-        /* Pulsante per aprire la pagina live intera se serve */
+
         .btn-live-link {
             display: block;
             text-align: center;
-            background: linear-gradient(to bottom, #ff5500 0%, #cc3300 100%);
+            background: linear-gradient(90deg, #ff5500 0%, #ff2200 100%);
             color: white;
-            padding: 8px;
+            padding: 10px;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 13px;
             text-decoration: none;
-            border-radius: 4px;
-            border: 1px solid #992200;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(255, 34, 0, 0.3);
+            transition: all 0.2s ease;
+        }
+        .btn-live-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 34, 0, 0.5);
         }
 
-        /* 💬 CHAT TESTUALE TRADIZIONALE */
+        /* 💬 CHAT MODERNA E PULITA */
         .chat-panel {
             flex: 2; 
             display: flex;
             flex-direction: column;
             height: 100%;
         }
+        
         .chat-history {
             flex: 1;
-            background-color: white;
-            border: 2px inset #fff;
-            padding: 10px;
+            background-color: #ffffff;
+            border: 1px solid #e1b3c4;
+            border-radius: 12px;
+            padding: 15px;
             overflow-y: auto;
-            font-size: 13px;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
         }
 
-        /* 👥 LISTA UTENTI ONSLINE */
+        /* Stile messaggi */
+        .msg-line { margin-bottom: 8px; font-size: 14px; line-height: 1.4; padding: 4px 8px; border-radius: 6px; }
+        .msg-system { background-color: #fff0f5; color: #94254b; font-weight: 600; border-left: 4px solid #94254b; }
+        .msg-user { background-color: #f1f1f1; color: #333; }
+        .msg-dj { background-color: #ffeef2; color: #d81b60; border-left: 4px solid #ff4081; }
+
+        /* 👥 LISTA UTENTI STILE CLUB */
         .users-panel {
-            width: 150px;
-            background-color: #fff;
-            border: 2px inset #fff;
+            width: 180px;
+            background-color: #ffffff;
+            border: 1px solid #e1b3c4;
+            border-radius: 12px;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
+        
         .users-header {
-            background-color: #e6b3c4;
-            padding: 5px;
-            font-size: 12px;
+            background: linear-gradient(to bottom, #fce4ec, #f8bbd0);
+            color: #880e4f;
+            padding: 10px;
+            font-size: 13px;
             font-weight: bold;
             text-align: center;
-            border-bottom: 1px solid #bbb;
+            border-bottom: 1px solid #f48fb1;
         }
-        .users-list { flex: 1; overflow-y: auto; padding: 6px; font-size: 12px; }
-        .user-row { display: flex; align-items: center; gap: 6px; padding: 3px 0; }
-        .status-dot { width: 10px; height: 10px; background-color: #00ff00; border-radius: 50%; }
-        .status-dj { background-color: #ff00ff; }
+        
+        .users-list { flex: 1; overflow-y: auto; padding: 10px; font-size: 13px; }
+        .user-row { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px dashed #f1f1f1; }
+        .status-dot { width: 10px; height: 10px; background-color: #00ff66; border-radius: 50%; box-shadow: 0 0 6px #00ff66; }
+        .status-dj { background-color: #ff007f; box-shadow: 0 0 8px #ff007f; }
 
-        /* FOOTER INPUT PER I MESSAGGI */
+        /* FOOTER INPUT DESIGN LUXURY */
         .visichat-footer {
-            background-color: #e1dfd0;
-            padding: 8px;
-            border-top: 1px solid #b5b2a1;
+            background-color: #f5f2eb;
+            padding: 12px 20px;
+            border-top: 1px solid #e0dbcd;
         }
-        .input-bar { display: flex; gap: 6px; }
-        .input-bar input { flex: 1; padding: 6px; border: 2px inset #fff; font-size: 13px; }
-        .btn-send { padding: 4px 18px; background-color: #94254b; color: white; border: 1px solid #4a0e23; font-weight: bold; cursor: pointer; }
+        
+        .input-bar { display: flex; gap: 10px; }
+        
+        .input-bar input { 
+            flex: 1; 
+            padding: 12px 16px; 
+            border: 1px solid #ccc; 
+            border-radius: 25px; 
+            font-size: 14px; 
+            outline: none;
+            transition: all 0.2s;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .input-bar input:focus {
+            border-color: #ff4081;
+            box-shadow: 0 0 5px rgba(255, 64, 129, 0.3), inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .btn-send { 
+            padding: 0 25px; 
+            background: linear-gradient(90deg, #94254b 0%, #b82e58 100%); 
+            color: white; 
+            border: none; 
+            border-radius: 25px; 
+            font-weight: bold; 
+            font-size: 14px;
+            cursor: pointer; 
+            box-shadow: 0 4px 10px rgba(148, 37, 75, 0.3);
+            transition: all 0.2s;
+        }
+        .btn-send:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(148, 37, 75, 0.4);
+        }
     </style>
 </head>
 <body>
 
 <div class="visichat-container">
     <div class="visichat-header">
-        <span>🌐 VisiChat Rubacuori v9.0 (DJ Tita Edition)</span>
-        <span style="color: #ffb3cd;">Ascolta la Live 📻</span>
+        <span>✨ Rubacuori Lounge & Radio v10.0</span>
+        <span style="color: #ffb3cd; font-size: 13px; background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 20px;">On Air: DJ Tita 🎧</span>
     </div>
 
     <div class="visichat-main">
-        <!-- 📻 RETRO PLAYER DI HEARTHIS.AT -->
+        <!-- 📻 RETRO PLAYER DI HEARTHIS.AT CON BORDO FLUO -->
         <div class="radio-side-panel">
             <div class="grid-title">🎵 IN CONSOLE: DJ TITA</div>
             <div class="player-box">
-                <!-- Inseriamo il widget player ufficiale di Hearthis collegato a te -->
-                <iframe width="100%" height="150" src="https://hearthis.at/embed/6a2432fbf1d8edjtita/live/?hcolor=791c3a&bg=222222&style=2" frameborder="0" scrolling="no"></iframe>
+                <iframe width="100%" height="150" src="https://hearthis.at/embed/6a2432fbf1d8edjtita/live/?hcolor=ff4081&bg=222222&style=2" frameborder="0" scrolling="no"></iframe>
             </div>
-            <a href="https://hearthis.at/6a2432fbf1d8edjtita/live/" target="_blank" class="btn-live-link">👉 Apri Live su Hearthis</a>
+            <a href="https://hearthis.at/6a2432fbf1d8edjtita/live/" target="_blank" class="btn-live-link">🚀 APRI LIVE INTERA</a>
         </div>
 
-        <!-- 💬 CHAT TESTUALE -->
+        <!-- 💬 CHAT TESTUALE ELEGANTE -->
         <div class="chat-panel">
             <div class="chat-history" id="chatHistory">
-                <div style="color: #94254b; font-weight: bold; font-size: 12px;">[SISTEMA] Radio-Chat Rubacuori attiva!</div>
-                <div style="color: #333; font-size: 12px; margin-top: 4px;">Alza il volume! Quando DJ Tita è in diretta, premi il tasto Play nel riquadro a sinistra per ascoltare la musica direttamente da qui.</div>
+                <div class="msg-line msg-system">[SISTEMA] Benvenuti nella nuovissima Rubacuori Lounge. Grafica aggiornata!</div>
+                <div class="msg-line" style="color: #666; font-size: 13px; font-style: italic; padding-left: 8px;">Clicca sul tasto Play a sinistra per attivare la musica della console mentre chiacchieri.</div>
             </div>
         </div>
 
-        <!-- LISTA UTENTI -->
+        <!-- LISTA UTENTI VIP -->
         <div class="users-panel">
-            <div class="users-header">Online</div>
+            <div class="users-header">Club Online</div>
             <div class="users-list" id="usersList">
-                <div class="user-row"><span class="status-dot status-dj"></span><strong>DJ_Tita 🎧</strong></div>
-                <div class="user-item" style="padding-top: 5px; font-style: italic; color:#666;">Tu (Online)</div>
+                <div class="user-row"><span class="status-dot status-dj"></span><strong style="color: #d81b60;">DJ_Tita 🎧</strong></div>
+                <div style="padding-top: 8px; font-size: 11px; color:#999; text-align: center; font-style: italic;">Tu sei online</div>
             </div>
         </div>
     </div>
 
     <div class="visichat-footer">
         <div class="input-bar">
-            <input type="text" id="chatInput" placeholder="Saluta DJ Tita o scrivi una richiesta...">
+            <input type="text" id="chatInput" placeholder="Invia un messaggio alla stanza...">
             <button class="btn-send" id="btnSend">Invia</button>
         </div>
     </div>
 </div>
 
 <script>
-    // 💬 GESTIONE MESSAGGI CHAT
     const chatHistory = document.getElementById('chatHistory');
     const chatInput = document.getElementById('chatInput');
     const btnSend = document.getElementById('btnSend');
@@ -182,9 +258,11 @@
     function doSendMessage() {
         const text = chatInput.value.trim();
         if(text === "") return;
+        
         const msg = document.createElement('div');
-        msg.style.marginBottom = "4px";
-        msg.innerHTML = `<strong>Utente:</strong> ${text}`;
+        msg.className = "msg-line msg-user";
+        msg.innerHTML = `<strong>Ospite:</strong> ${text}`;
+        
         chatHistory.appendChild(msg);
         chatHistory.scrollTop = chatHistory.scrollHeight;
         chatInput.value = "";
