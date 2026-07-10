@@ -7,7 +7,6 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         
-        /* Sfondo animato globale */
         body { 
             background: linear-gradient(135deg, #4a0e23 0%, #8c1c40 50%, #b82e58 100%);
             background-size: 400% 400%;
@@ -78,20 +77,18 @@
             box-shadow: 0 4px 15px rgba(148, 37, 75, 0.4);
         }
 
-        /* 💬 CONTENITORE CHAT STRUTTURATO PER NON SBORDARE */
+        /* 💬 CONTENITORE CHAT */
         .visichat-container {
-            width: 100%;
-            max-width: 1100px;
-            height: 90vh; /* Prende il 90% dell'altezza dello schermo, perfetto per ogni display */
+            width: 1150px;
+            height: 90vh; 
             background-color: rgba(255, 255, 255, 0.95);
             border-radius: 16px;
-            display: none; /* Diventa flex via JS */
+            display: none; 
             flex-direction: column;
             box-shadow: 0px 15px 35px rgba(0,0,0,0.6);
             overflow: hidden;
         }
 
-        /* Intestazione */
         .visichat-header {
             background: linear-gradient(90deg, #5c142e 0%, #94254b 50%, #5c142e 100%);
             color: white;
@@ -101,10 +98,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-shrink: 0; /* Impedisce all'header di rimpicciolirsi */
+            flex-shrink: 0;
         }
 
-        /* Corpo Principale */
         .visichat-main {
             display: flex;
             flex: 1;
@@ -114,9 +110,9 @@
             background: #fdfafb;
         }
 
-        /* 📻 PANNELLO RADIO */
+        /* 📻 PANNELLO RADIO LATERALE */
         .radio-side-panel {
-            width: 320px; 
+            width: 300px; 
             background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
             border: 2px solid #ff4081;
             border-radius: 12px;
@@ -157,7 +153,7 @@
             border-radius: 8px;
         }
 
-        /* 💬 AREA MESSAGGI CHAT */
+        /* 💬 CHAT CENTRALE */
         .chat-panel {
             flex: 2; 
             display: flex;
@@ -172,29 +168,106 @@
             border: 1px solid #e1b3c4;
             border-radius: 12px;
             padding: 15px;
-            overflow-y: auto; /* Crea la barra di scorrimento interna per i messaggi */
+            overflow-y: auto;
         }
 
         .msg-line { margin-bottom: 8px; font-size: 14px; line-height: 1.4; padding: 4px 8px; border-radius: 6px; }
         .msg-system { background-color: #fff0f5; color: #94254b; font-weight: 600; border-left: 4px solid #94254b; }
         .msg-user { background-color: #f1f1f1; color: #333; }
 
-        /* 👥 LISTA UTENTI */
+        /* 👥 PANNELLO DESTRO: WEBCAM + UTENTI */
+        .right-side-panel {
+            width: 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        /* 📹 BOX WEBCAM PICCOLE */
+        .webcam-section {
+            background-color: #ffffff;
+            border: 1px solid #e1b3c4;
+            border-radius: 12px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .webcam-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #880e4f;
+            text-align: center;
+            border-bottom: 1px solid #f48fb1;
+            padding-bottom: 4px;
+        }
+        .cam-box {
+            width: 100%;
+            height: 130px;
+            background-color: #222;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid #ddd;
+        }
+        .cam-box.dj-cam {
+            border-color: #ff007f;
+        }
+        .cam-box video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .cam-label {
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .cam-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 11px;
+            text-align: center;
+            padding: 10px;
+        }
+        .btn-cam {
+            width: 100%;
+            padding: 6px;
+            font-size: 11px;
+            background-color: #94254b;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* LISTA UTENTI */
         .users-panel {
-            width: 180px;
+            flex: 1;
             background-color: #ffffff;
             border: 1px solid #e1b3c4;
             border-radius: 12px;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            flex-shrink: 0;
         }
         
         .users-header {
             background: linear-gradient(to bottom, #fce4ec, #f8bbd0);
             color: #880e4f;
-            padding: 10px;
+            padding: 8px;
             font-size: 13px;
             font-weight: bold;
             text-align: center;
@@ -202,16 +275,16 @@
         }
         
         .users-list { flex: 1; overflow-y: auto; padding: 10px; font-size: 13px; }
-        .user-row { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
-        .status-dot { width: 10px; height: 10px; background-color: #00ff66; border-radius: 50%; box-shadow: 0 0 6px #00ff66; }
-        .status-dj { background-color: #ff007f; box-shadow: 0 0 8px #ff007f; }
+        .user-row { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
+        .status-dot { width: 10px; height: 10px; background-color: #00ff66; border-radius: 50%; }
+        .status-dj { background-color: #ff007f; box-shadow: 0 0 6px #ff007f; }
 
-        /* 🔒 FOOTER INPUT (BLOCCATO IN BASSO) */
+        /* FOOTER INPUT */
         .visichat-footer {
             background-color: #f5f2eb;
             padding: 12px 20px;
             border-top: 1px solid #e0dbcd;
-            flex-shrink: 0; /* Impedisce che sparisca o si schiacci */
+            flex-shrink: 0;
         }
         
         .input-bar { display: flex; gap: 10px; }
@@ -230,10 +303,10 @@
     <button class="btn-login" id="btnLogin">Entra nel Club</button>
 </div>
 
-<!-- 💬 CONTENITORE CHAT (Adattabile e protetto) -->
+<!-- 💬 CONTENITORE CHAT -->
 <div class="visichat-container" id="chatContainer">
     <div class="visichat-header">
-        <span>✨ Rubacuori Lounge & Radio v11.5</span>
+        <span>✨ Rubacuori VisiChat & Radio v12.0</span>
         <span style="color: #ffb3cd; font-size: 13px; background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 20px;">On Air: DJ Tigrotta 🐯🎧</span>
     </div>
 
@@ -250,21 +323,46 @@
         <!-- CHAT TIMELINE -->
         <div class="chat-panel">
             <div class="chat-history" id="chatHistory">
-                <div class="msg-line msg-system">[SISTEMA] Benvenuto nel club! Accendi la radio a sinistra per ballare con DJ Tigrotta! 🐯</div>
+                <div class="msg-line msg-system">[SISTEMA] Benvenuto nel club! Accendi la radio e attiva la tua cam a destra! 🐯📹</div>
             </div>
         </div>
 
-        <!-- UTENTI -->
-        <div class="users-panel">
-            <div class="users-header">Club Online</div>
-            <div class="users-list" id="usersList">
-                <div class="user-row"><span class="status-dot status-dj"></span><strong style="color: #d81b60;">DJ_Tigrotta 🐯</strong></div>
-                <div class="user-row" id="currentUserRow" style="display:none;"><span class="status-dot"></span><span id="displayMyNick" style="font-weight: bold; color: #333;"></span> (Tu)</div>
+        <!-- PANNELLO DESTRO: WEBCAM + UTENTI -->
+        <div class="right-side-panel">
+            
+            <!-- SEZIONE WEBCAM PICCOLE -->
+            <div class="webcam-section">
+                <div class="webcam-title">📹 Live Cam</div>
+                
+                <!-- Cam DJ Tigrotta -->
+                <div class="cam-box dj-cam">
+                    <div class="cam-placeholder" id="djPlaceholder">🎵 Console<br>Offline</div>
+                    <video id="djVideo" autoplay playsinline muted style="display:none;"></video>
+                    <div class="cam-label" style="background:#ff007f;">DJ Tigrotta 👑</div>
+                </div>
+                
+                <!-- Cam Utente / Ospite -->
+                <div class="cam-box">
+                    <div class="cam-placeholder" id="userPlaceholder">Cam spenta</div>
+                    <video id="userVideo" autoplay playsinline muted style="display:none;"></video>
+                    <div class="cam-label" id="userCamLabel">Tu</div>
+                </div>
+                <button class="btn-cam" id="btnToggleCam">Accendi la mia Cam</button>
             </div>
+
+            <!-- UTENTI ONLINE -->
+            <div class="users-panel">
+                <div class="users-header">Club Online</div>
+                <div class="users-list" id="usersList">
+                    <div class="user-row"><span class="status-dot status-dj"></span><strong style="color: #d81b60;">DJ_Tigrotta 🐯</strong></div>
+                    <div class="user-row" id="currentUserRow" style="display:none;"><span class="status-dot"></span><span id="displayMyNick" style="font-weight: bold; color: #333;"></span></div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <!-- IL FOOTER INVIATI SARA' SEMPRE BLOCCATO QUI -->
+    <!-- FOOTER INVIA MESSAGGI -->
     <div class="visichat-footer">
         <div class="input-bar">
             <input type="text" id="chatInput" placeholder="Scrivi un messaggio e premi invio...">
@@ -274,13 +372,14 @@
 </div>
 
 <script>
-    // Login
+    // Login e Nickname
     const loginScreen = document.getElementById('loginScreen');
     const chatContainer = document.getElementById('chatContainer');
     const nicknameInput = document.getElementById('nicknameInput');
     const btnLogin = document.getElementById('btnLogin');
     const currentUserRow = document.getElementById('currentUserRow');
     const displayMyNick = document.getElementById('displayMyNick');
+    const userCamLabel = document.getElementById('userCamLabel');
     
     let userNickname = "Ospite";
 
@@ -292,7 +391,8 @@
         }
         
         userNickname = nick; 
-        displayMyNick.innerText = userNickname; 
+        displayMyNick.innerText = userNickname + " (Tu)"; 
+        userCamLabel.innerText = userNickname; // Mette il nick sotto la tua webcam
         currentUserRow.style.display = "flex"; 
         
         loginScreen.style.display = "none";
@@ -307,7 +407,7 @@
     btnLogin.addEventListener('click', enterChat);
     nicknameInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') enterChat(); });
 
-    // Messaggi
+    // Gestione Messaggi
     const chatHistory = document.getElementById('chatHistory');
     const chatInput = document.getElementById('chatInput');
     const btnSend = document.getElementById('btnSend');
@@ -327,6 +427,37 @@
 
     btnSend.addEventListener('click', doSendMessage);
     chatInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') doSendMessage(); });
+
+    // 📹 LOGICA PER ACCENDERE LA WEBCAM PERSONALE
+    const btnToggleCam = document.getElementById('btnToggleCam');
+    const userVideo = document.getElementById('userVideo');
+    const userPlaceholder = document.getElementById('userPlaceholder');
+    let localStream = null;
+
+    btnToggleCam.addEventListener('click', async () => {
+        if (!localStream) {
+            try {
+                // Richiede l'accesso alla fotocamera del dispositivo dell'utente
+                localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+                userVideo.srcObject = localStream;
+                userPlaceholder.style.display = "none";
+                userVideo.style.display = "block";
+                btnToggleCam.innerText = "Spegni la mia Cam";
+                btnToggleCam.style.background = "#5c142e";
+            } catch (err) {
+                alert("Impossibile accedere alla webcam. Assicurati di aver dato i permessi al browser!");
+                console.error(err);
+            }
+        } else {
+            // Spegne la webcam
+            localStream.getTracks().forEach(track => track.stop());
+            userVideo.style.display = "none";
+            userPlaceholder.style.display = "flex";
+            localStream = null;
+            btnToggleCam.innerText = "Accendi la mia Cam";
+            btnToggleCam.style.background = "#94254b";
+        }
+    });
 </script>
 
 </body>
