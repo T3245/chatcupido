@@ -12,7 +12,7 @@
             background: linear-gradient(135deg, #4a0e23 0%, #8c1c40 50%, #b82e58 100%);
             background-size: 400% 400%;
             animation: gradientBg 15s ease infinite;
-            padding: 20px; 
+            padding: 10px; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
@@ -26,9 +26,10 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* 🚪 SCHERMATA HOME / LOGIN */
+        /* 🚪 HOME SCREEN / LOGIN */
         .login-screen {
-            width: 450px;
+            width: 100%;
+            max-width: 450px;
             background-color: rgba(255, 255, 255, 0.96);
             border-radius: 16px;
             padding: 40px 30px;
@@ -39,7 +40,6 @@
             align-items: center;
             gap: 20px;
             z-index: 10;
-            transition: all 0.5s ease;
         }
 
         .login-title {
@@ -63,10 +63,6 @@
             font-size: 16px;
             outline: none;
             text-align: center;
-            transition: border-color 0.2s;
-        }
-        .login-input:focus {
-            border-color: #ff4081;
         }
 
         .btn-login {
@@ -81,16 +77,13 @@
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(148, 37, 75, 0.4);
         }
-        .btn-login:hover {
-            transform: translateY(-2px);
-        }
 
-        /* 💬 CONTENITORE CHAT (Nascosto all'inizio) */
+        /* 💬 CONTENITORE CHAT STRUTTURATO PER NON SBORDARE */
         .visichat-container {
-            width: 1100px;
-            height: 650px;
+            width: 100%;
+            max-width: 1100px;
+            height: 90vh; /* Prende il 90% dell'altezza dello schermo, perfetto per ogni display */
             background-color: rgba(255, 255, 255, 0.95);
-            border: none;
             border-radius: 16px;
             display: none; /* Diventa flex via JS */
             flex-direction: column;
@@ -98,7 +91,7 @@
             overflow: hidden;
         }
 
-        /* Intestazione chat */
+        /* Intestazione */
         .visichat-header {
             background: linear-gradient(90deg, #5c142e 0%, #94254b 50%, #5c142e 100%);
             color: white;
@@ -108,9 +101,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #4a0e23;
+            flex-shrink: 0; /* Impedisce all'header di rimpicciolirsi */
         }
 
+        /* Corpo Principale */
         .visichat-main {
             display: flex;
             flex: 1;
@@ -122,7 +116,7 @@
 
         /* 📻 PANNELLO RADIO */
         .radio-side-panel {
-            width: 340px; 
+            width: 320px; 
             background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
             border: 2px solid #ff4081;
             border-radius: 12px;
@@ -130,6 +124,7 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+            flex-shrink: 0;
         }
         
         .grid-title {
@@ -140,14 +135,12 @@
             border-bottom: 1px solid #444;
             padding-bottom: 6px;
             text-align: center;
-            letter-spacing: 1.5px;
         }
 
         .player-box {
             width: 100%;
             height: 150px;
             background-color: #111;
-            border: 1px solid #333;
             border-radius: 8px;
             overflow: hidden;
         }
@@ -164,12 +157,13 @@
             border-radius: 8px;
         }
 
-        /* 💬 CHAT TIMELINE */
+        /* 💬 AREA MESSAGGI CHAT */
         .chat-panel {
             flex: 2; 
             display: flex;
             flex-direction: column;
             height: 100%;
+            overflow: hidden;
         }
         
         .chat-history {
@@ -178,7 +172,7 @@
             border: 1px solid #e1b3c4;
             border-radius: 12px;
             padding: 15px;
-            overflow-y: auto;
+            overflow-y: auto; /* Crea la barra di scorrimento interna per i messaggi */
         }
 
         .msg-line { margin-bottom: 8px; font-size: 14px; line-height: 1.4; padding: 4px 8px; border-radius: 6px; }
@@ -194,6 +188,7 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            flex-shrink: 0;
         }
         
         .users-header {
@@ -211,11 +206,12 @@
         .status-dot { width: 10px; height: 10px; background-color: #00ff66; border-radius: 50%; box-shadow: 0 0 6px #00ff66; }
         .status-dj { background-color: #ff007f; box-shadow: 0 0 8px #ff007f; }
 
-        /* INPUT BAR */
+        /* 🔒 FOOTER INPUT (BLOCCATO IN BASSO) */
         .visichat-footer {
             background-color: #f5f2eb;
             padding: 12px 20px;
             border-top: 1px solid #e0dbcd;
+            flex-shrink: 0; /* Impedisce che sparisca o si schiacci */
         }
         
         .input-bar { display: flex; gap: 10px; }
@@ -234,10 +230,10 @@
     <button class="btn-login" id="btnLogin">Entra nel Club</button>
 </div>
 
-<!-- 💬 CONTENITORE CHAT (Inizialmente nascosto) -->
+<!-- 💬 CONTENITORE CHAT (Adattabile e protetto) -->
 <div class="visichat-container" id="chatContainer">
     <div class="visichat-header">
-        <span>✨ Rubacuori Lounge & Radio v11.0</span>
+        <span>✨ Rubacuori Lounge & Radio v11.5</span>
         <span style="color: #ffb3cd; font-size: 13px; background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 20px;">On Air: DJ Tigrotta 🐯🎧</span>
     </div>
 
@@ -263,22 +259,22 @@
             <div class="users-header">Club Online</div>
             <div class="users-list" id="usersList">
                 <div class="user-row"><span class="status-dot status-dj"></span><strong style="color: #d81b60;">DJ_Tigrotta 🐯</strong></div>
-                <!-- Il nick inserito dall'utente comparirà qui sotto -->
                 <div class="user-row" id="currentUserRow" style="display:none;"><span class="status-dot"></span><span id="displayMyNick" style="font-weight: bold; color: #333;"></span> (Tu)</div>
             </div>
         </div>
     </div>
 
+    <!-- IL FOOTER INVIATI SARA' SEMPRE BLOCCATO QUI -->
     <div class="visichat-footer">
         <div class="input-bar">
-            <input type="text" id="chatInput" placeholder="Scrivi qualcosa alla stanza...">
+            <input type="text" id="chatInput" placeholder="Scrivi un messaggio e premi invio...">
             <button class="btn-send" id="btnSend">Invia</button>
         </div>
     </div>
 </div>
 
 <script>
-    // Gestione Login / Nickname
+    // Login
     const loginScreen = document.getElementById('loginScreen');
     const chatContainer = document.getElementById('chatContainer');
     const nicknameInput = document.getElementById('nicknameInput');
@@ -286,7 +282,7 @@
     const currentUserRow = document.getElementById('currentUserRow');
     const displayMyNick = document.getElementById('displayMyNick');
     
-    let userNickname = "Ospite"; // Nickname di default
+    let userNickname = "Ospite";
 
     function enterChat() {
         const nick = nicknameInput.value.trim();
@@ -295,15 +291,13 @@
             return;
         }
         
-        userNickname = nick; // Salva il nick scelto
-        displayMyNick.innerText = userNickname; // Lo mette nella lista utenti
-        currentUserRow.style.display = "flex"; // Mostra la riga dell'utente
+        userNickname = nick; 
+        displayMyNick.innerText = userNickname; 
+        currentUserRow.style.display = "flex"; 
         
-        // Nasconde il login e mostra la chat
         loginScreen.style.display = "none";
         chatContainer.style.display = "flex";
 
-        // Messaggio di benvenuto personalizzato in chat
         const welcomeMsg = document.createElement('div');
         welcomeMsg.className = "msg-line msg-system";
         welcomeMsg.innerHTML = `[NOTIFICA] 🚪 <strong>${userNickname}</strong> è appena entrato in stanza!`;
@@ -313,8 +307,7 @@
     btnLogin.addEventListener('click', enterChat);
     nicknameInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') enterChat(); });
 
-
-    // Gestione Messaggi
+    // Messaggi
     const chatHistory = document.getElementById('chatHistory');
     const chatInput = document.getElementById('chatInput');
     const btnSend = document.getElementById('btnSend');
