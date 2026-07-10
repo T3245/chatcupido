@@ -7,7 +7,6 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         
-        /* Sfondo animato super elegante con sfumatura e cuori stilizzati di sfondo */
         body { 
             background: linear-gradient(135deg, #4a0e23 0%, #8c1c40 50%, #b82e58 100%);
             background-size: 400% 400%;
@@ -25,7 +24,6 @@
             100% { background-position: 0% 50%; }
         }
         
-        /* Contenitore della chat stile "Vip Lounge" con bordi neon sfumati */
         .visichat-container {
             width: 1100px;
             height: 650px;
@@ -38,7 +36,6 @@
             overflow: hidden;
         }
 
-        /* Intestazione scintillante */
         .visichat-header {
             background: linear-gradient(90deg, #5c142e 0%, #94254b 50%, #5c142e 100%);
             color: white;
@@ -62,7 +59,6 @@
             background: #fdfafb;
         }
 
-        /* 📻 PANNELLO RADIO LATERALE LOOK NEON */
         .radio-side-panel {
             width: 340px; 
             background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
@@ -114,7 +110,6 @@
             box-shadow: 0 6px 15px rgba(255, 34, 0, 0.5);
         }
 
-        /* 💬 CHAT MODERNA E PULITA */
         .chat-panel {
             flex: 2; 
             display: flex;
@@ -132,13 +127,10 @@
             box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
         }
 
-        /* Stile messaggi */
         .msg-line { margin-bottom: 8px; font-size: 14px; line-height: 1.4; padding: 4px 8px; border-radius: 6px; }
         .msg-system { background-color: #fff0f5; color: #94254b; font-weight: 600; border-left: 4px solid #94254b; }
         .msg-user { background-color: #f1f1f1; color: #333; }
-        .msg-dj { background-color: #ffeef2; color: #d81b60; border-left: 4px solid #ff4081; }
 
-        /* 👥 LISTA UTENTI STILE CLUB */
         .users-panel {
             width: 180px;
             background-color: #ffffff;
@@ -164,7 +156,6 @@
         .status-dot { width: 10px; height: 10px; background-color: #00ff66; border-radius: 50%; box-shadow: 0 0 6px #00ff66; }
         .status-dj { background-color: #ff007f; box-shadow: 0 0 8px #ff007f; }
 
-        /* FOOTER INPUT DESIGN LUXURY */
         .visichat-footer {
             background-color: #f5f2eb;
             padding: 12px 20px;
@@ -183,10 +174,6 @@
             transition: all 0.2s;
             box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
-        .input-bar input:focus {
-            border-color: #ff4081;
-            box-shadow: 0 0 5px rgba(255, 64, 129, 0.3), inset 0 1px 3px rgba(0,0,0,0.1);
-        }
         
         .btn-send { 
             padding: 0 25px; 
@@ -198,11 +185,6 @@
             font-size: 14px;
             cursor: pointer; 
             box-shadow: 0 4px 10px rgba(148, 37, 75, 0.3);
-            transition: all 0.2s;
-        }
-        .btn-send:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 14px rgba(148, 37, 75, 0.4);
         }
     </style>
 </head>
@@ -211,32 +193,29 @@
 <div class="visichat-container">
     <div class="visichat-header">
         <span>✨ Rubacuori Lounge & Radio v10.0</span>
-        <span style="color: #ffb3cd; font-size: 13px; background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 20px;">On Air: DJ Tita 🎧</span>
+        <span style="color: #ffb3cd; font-size: 13px; background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 20px;">On Air: DJ Tigrotta 🐯🎧</span>
     </div>
 
     <div class="visichat-main">
-        <!-- 📻 RETRO PLAYER DI HEARTHIS.AT CON BORDO FLUO -->
         <div class="radio-side-panel">
-            <div class="grid-title">🎵 IN CONSOLE: DJ TITA</div>
+            <div class="grid-title">🎵 IN CONSOLE: DJ TIGROTTA</div>
             <div class="player-box">
                 <iframe width="100%" height="150" src="https://hearthis.at/embed/6a2432fbf1d8edjtita/live/?hcolor=ff4081&bg=222222&style=2" frameborder="0" scrolling="no"></iframe>
             </div>
             <a href="https://hearthis.at/6a2432fbf1d8edjtita/live/" target="_blank" class="btn-live-link">🚀 APRI LIVE INTERA</a>
         </div>
 
-        <!-- 💬 CHAT TESTUALE ELEGANTE -->
         <div class="chat-panel">
             <div class="chat-history" id="chatHistory">
-                <div class="msg-line msg-system">[SISTEMA] Benvenuti nella nuovissima Rubacuori Lounge. Grafica aggiornata!</div>
-                <div class="msg-line" style="color: #666; font-size: 13px; font-style: italic; padding-left: 8px;">Clicca sul tasto Play a sinistra per attivare la musica della console mentre chiacchieri.</div>
+                <div class="msg-line msg-system">[SISTEMA] Benvenuti nella Rubacuori Lounge. In console c'è DJ Tigrotta! 🐯</div>
+                <div class="msg-line" style="color: #666; font-size: 13px; font-style: italic; padding-left: 8px;">Mettiti comodo, accendi il player a sinistra e goditi il set.</div>
             </div>
         </div>
 
-        <!-- LISTA UTENTI VIP -->
         <div class="users-panel">
             <div class="users-header">Club Online</div>
             <div class="users-list" id="usersList">
-                <div class="user-row"><span class="status-dot status-dj"></span><strong style="color: #d81b60;">DJ_Tita 🎧</strong></div>
+                <div class="user-row"><span class="status-dot status-dj"></span><strong style="color: #d81b60;">DJ_Tigrotta 🐯</strong></div>
                 <div style="padding-top: 8px; font-size: 11px; color:#999; text-align: center; font-style: italic;">Tu sei online</div>
             </div>
         </div>
@@ -244,7 +223,7 @@
 
     <div class="visichat-footer">
         <div class="input-bar">
-            <input type="text" id="chatInput" placeholder="Invia un messaggio alla stanza...">
+            <input type="text" id="chatInput" placeholder="Scrivi una dedica a DJ Tigrotta...">
             <button class="btn-send" id="btnSend">Invia</button>
         </div>
     </div>
