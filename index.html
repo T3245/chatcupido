@@ -119,8 +119,9 @@
             padding: 15px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 15px;
             flex-shrink: 0;
+            justify-content: center;
         }
         
         .grid-title {
@@ -135,23 +136,60 @@
 
         .player-box {
             width: 100%;
-            height: 150px;
             background-color: #111;
             border-radius: 8px;
-            overflow: hidden;
+            padding: 25px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            border: 1px solid #333;
+        }
+
+        /* 🔘 PULSANTE STREAM ESCLUSIVO */
+        .btn-radio-play {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff007f, #b82e58);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-radio-play:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.8);
+        }
+
+        .live-status-text {
+            font-size: 12px;
+            color: #aaa;
+            font-weight: bold;
+            text-align: center;
+        }
+        .live-status-text.online {
+            color: #00ff66;
+            text-shadow: 0 0 5px rgba(0,255,102,0.3);
         }
 
         .btn-live-link {
             display: block;
             text-align: center;
-            background: linear-gradient(90deg, #ff007f 0%, #7b1fa2 100%);
-            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ff85a7;
             padding: 10px;
             font-weight: bold;
-            font-size: 13px;
+            font-size: 12px;
             text-decoration: none;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(255, 0, 127, 0.3);
+            border: 1px dashed #ff4081;
         }
 
         /* 💬 CHAT CENTRALE */
@@ -306,26 +344,25 @@
 <!-- 💬 CONTENITORE CHAT -->
 <div class="visichat-container" id="chatContainer">
     <div class="visichat-header">
-        <span>✨ Rubacuori VisiChat & Radio v15.0</span>
+        <span>✨ Rubacuori VisiChat & Radio v16.0</span>
         <span style="color: #ffb3cd; font-size: 13px; background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 20px;">On Air: DJ Tigrotta 🐯🎧</span>
     </div>
 
     <div class="visichat-main">
-        <!-- 📻 PANNELLO RADIO LATERALE (PLAYER CLOUD EMBED) -->
+        <!-- 📻 PANNELLO RADIO LATERALE (CON PULSANTE DI FLUSSO DIRETTO) -->
         <div class="radio-side-panel">
-            <div class="grid-title">🎵 IN CONSOLE: DJ TIGROTTA</div>
+            <div class="grid-title">🎧 RUBACUORI LIVE</div>
             <div class="player-box">
-                <!-- Iframe nativo di Caster.fm Cloud che bypassa i blocchi del browser -->
-                <iframe src="https://player.caster.fm/index.php?username=djtigrotta&style=cyber" width="100%" height="150" frameborder="0" scrolling="no" allow="autoplay"></iframe>
+                <button class="btn-radio-play" id="btnRadioPlay">▶</button>
+                <div class="live-status-text" id="radioStatusText">Clicca per ascoltare la diretta!</div>
             </div>
-            <!-- Pulsante d'emergenza: se il browser blocca l'iframe, questo apre il flusso sicuro -->
-            <a href="https://djtigrotta.caster.fm" target="_blank" class="btn-live-link">🔊 APRI STREAM SEPARATO</a>
+            <a href="https://cloud.caster.fm" target="_blank" class="btn-live-link">🔗 APRI PANNELLO CASTER</a>
         </div>
 
         <!-- CHAT TIMELINE -->
         <div class="chat-panel">
             <div class="chat-history" id="chatHistory">
-                <div class="msg-line msg-system">[SISTEMA] Player Caster Cloud aggiornato. Se non senti la musica, assicurati che la tua console su cloud.caster.fm sia impostata su "ONLINE"! 🐯📻</div>
+                <div class="msg-line msg-system">[SISTEMA] Sistema anti-errore caricato. Clicca sul pulsante rosa "▶" a sinistra per accendere la radio! 🐯📻</div>
             </div>
         </div>
 
@@ -421,6 +458,40 @@
 
     btnSend.addEventListener('click', doSendMessage);
     chatInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') doSendMessage(); });
+
+    // 📡 LOGICA AUDIO ANTI-BLOCCO PER CASTER.FM
+    const btnRadioPlay = document.getElementById('btnRadioPlay');
+    const radioStatusText = document.getElementById('radioStatusText');
+    
+    // Creiamo l'oggetto audio via codice per bypassare i blocchi visivi del browser
+    let audioStream = new Audio();
+    
+    // CAMBIA QUESTO LINK CON IL TUO "STREAM URL" DAL TUO PANNELLO CLOUD.CASTER.FM
+    audioStream.src = "https://shaincast.caster.fm:2199/tunein/djtigrotta.mp3"; 
+    
+    let isPlaying = false;
+
+    btnRadioPlay.addEventListener('click', () => {
+        if (!isPlaying) {
+            audioStream.play().then(() => {
+                isPlaying = true;
+                btnRadioPlay.innerText = "⏸";
+                radioStatusText.innerText = "🟢 IN ONDA - ASCOLTO ATTIVO";
+                radioStatusText.classList.add('online');
+            }).catch(err => {
+                alert("Errore di riproduzione. Assicurati che la tua radio stia trasmettendo live dal pannello!");
+                console.error(err);
+            });
+        } else {
+            audioStream.pause();
+            // Resettiamo lo stream per non accumulare ritardo alla ripartenza
+            audioStream.src = audioStream.src; 
+            isPlaying = false;
+            btnRadioPlay.innerText = "▶";
+            radioStatusText.innerText = "Radio in pausa.";
+            radioStatusText.classList.remove('online');
+        }
+    });
 
     // Webcam
     const btnToggleCam = document.getElementById('btnToggleCam');
